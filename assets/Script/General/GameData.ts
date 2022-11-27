@@ -224,6 +224,7 @@ export class PersistedData {
     hideRewardAd = false;
     yAxisStartsFromZero = true;
     showSupplyChain = false;
+    buildingWarnings = true;
     fullscreen = false;
     hideDiscordBanner = false;
     hideChat = isIOS();

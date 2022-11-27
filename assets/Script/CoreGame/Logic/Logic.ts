@@ -273,7 +273,7 @@ export function canPlaceOnTile(b: keyof Buildings, xy: string) {
 
 export function warnBeforeBuild(b: keyof Buildings, xy: string, buildAction: () => void) {
     const warning = BLD[b]?.buildOnTileWarning?.(xy);
-    if (warning) {
+    if (D.persisted.buildingWarnings && warning) {
         showAlert(t("BuildWarningTitle"), t("BuildWarningTitleDesc", { reason: warning }), [
             { name: t("Cancel"), class: "outline" },
             {

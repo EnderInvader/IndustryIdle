@@ -112,6 +112,12 @@ export function SettingsPage(): m.Comp {
                     G.audio.playClick();
                     D.persisted.showSupplyChain = !D.persisted.showSupplyChain;
                 }),
+                m(".hr"),
+                // TODO: Language functions, t()
+                uiBoxToggle("Building Warnings", "Display a warning when constructing a specialized building in an bad location.", D.persisted.buildingWarnings, () => {
+                    G.audio.playClick();
+                    D.persisted.buildingWarnings = !D.persisted.buildingWarnings;
+                }),
                 ifTrue(isSteam(), () => [
                     m(".hr"),
                     uiBoxToggle(t("SettingsFullScreen"), t("SettingsFullScreenDesc"), D.persisted.fullscreen, () => {
