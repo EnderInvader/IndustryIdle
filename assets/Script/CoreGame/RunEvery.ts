@@ -8,6 +8,10 @@ import { tickCrowdfundingAndNews } from "./Logic/Crowdfunding";
 import { tickInterestRate, tickPrice } from "./Logic/Price";
 import { tickBuildings, tickOfflineEarning, tickOrder, tickPolicy, tickPower, tickResources } from "./Logic/Tick";
 
+/////////////////// Space Expansion (Ender_Invader) ////////////////////
+import { tickAsteroidSpace } from "../SpaceExpansion/SpaceExpansion";
+////////////////////////////////////////////////////////////////////////
+
 export function runEverySecond() {
     const now = serverNow();
     clearCache();
@@ -25,6 +29,9 @@ export function runEverySecond() {
     tickCycle(now);
     tickUI();
     tickSave();
+
+    /////////////////// Space Expansion (Ender_Invader) ////////////////////
+    tickAsteroidSpace(now);
 }
 
 export function runEveryMinute() {

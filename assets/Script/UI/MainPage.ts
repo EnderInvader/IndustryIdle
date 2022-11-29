@@ -96,6 +96,14 @@ export function MainPage(): m.Component {
                             m("div", t("SwissShop")),
                             m(".mv-10", iconB("arrow_forward")),
                         ]),
+
+                        /////////////////// Space Expansion (Ender_Invader) ////////////////////
+                        m(".hr"),
+                        m(".two-col.pointer.blue", { onclick: () => G.world.routeTo(G.launchCommand.grid) }, [
+                            m("div", t("LaunchCommand")),
+                            m(".mv-10", iconB("arrow_forward")),
+                        ]),
+                        ////////////////////////////////////////////////////////////////////////
                     ]),
                     m(".box", [
                         m(".title", t("GetHelp")),

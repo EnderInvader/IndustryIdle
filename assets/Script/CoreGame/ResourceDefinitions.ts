@@ -176,4 +176,34 @@ export class Resources {
     PSL: ResourceItem = { name: () => t("PumpkinSpiceLatte"), fuelCost: 1 };
     Pmkpi: ResourceItem = { name: () => t("PumpkinPie"), fuelCost: 1 };
     QtCp: ResourceItem = { name: () => t("QuantumComputer"), fuelCost: 1 };
+
+    /////////////////// Space Expansion (Ender_Invader) ////////////////////
+    RadarSat: ResourceItem = {
+        name: () => t("RadarSatellite"),
+        fuelCost: 5,
+        getPrice: (adp, random) => {
+            return 0;
+        },
+    };
+    TeleSat: ResourceItem = {
+        name: () => t("TelescopeSatellite"),
+        fuelCost: 5,
+        getPrice: (adp, random) => {
+            return 0;
+        },
+    };
+    AstroDir: ResourceItem = {
+        name: () => t("AsteroidRedirector"),
+        fuelCost: 5,
+        getPrice: (adp, random) => {
+            return 0;
+        },
+    };
+    AstroMiner: ResourceItem = {
+        name: () => t("AsteroidMiner"),
+        fuelCost: 5,
+        getPrice: (adp, random) => {
+            return 0;
+        },
+    };
 }

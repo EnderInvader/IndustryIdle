@@ -126,6 +126,13 @@ export default class EntityVisual extends cc.Component {
                 case "LogisticsDepartment":
                     this.warning.active = getResDiff(D.fuelResType) < 0;
                     return;
+                
+                /////////////////// Space Expansion (Ender_Invader) ////////////////////
+                case "LaunchCommand":
+                    this.setUnread(D.asteroidsSpace.length, false);
+                    return;
+                ////////////////////////////////////////////////////////////////////////
+
                 default:
                     return;
             }

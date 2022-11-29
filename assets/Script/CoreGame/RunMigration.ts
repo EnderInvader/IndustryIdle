@@ -285,6 +285,9 @@ export function runMigration() {
         runAllTests();
         verifyBuildingDefinitions();
     }
+
+    /////////////////// Space Expansion (Ender_Invader) ////////////////////
+    G.launchCommand = addBuilding(`${mid},${mid + 1}`, "LaunchCommand", {}, true);
 }
 
 export function addBuilding(

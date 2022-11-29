@@ -32,6 +32,10 @@ import {
 } from "./CustomDefinitions";
 import { MultipleRecipePanel } from "./MultipleRecipePanel";
 
+/////////////////// Space Expansion (Ender_Invader) ////////////////////
+import { LaunchCommandPage } from "../../SpaceExpansion/LaunchCommandPage";
+////////////////////////////////////////////////////////////////////////
+
 export type ResourceNumberMap = Partial<Record<keyof Resources, number>>;
 export type ResourceSet = Partial<Record<keyof Resources, true>>;
 export type BuildingSet = Partial<Record<keyof Buildings, true>>;
@@ -1832,6 +1836,63 @@ export class Buildings {
         power: 0,
         builtin: true,
         page: StatPage,
+    };
+
+    /////////////////// Space Expansion (Ender_Invader) ////////////////////
+    AdvancedSatelliteFactory: BuildingItem = {
+        name: () => t("AdvancedSatelliteFactory"),
+        power: -10,
+        staticInput: { Al: 2 }, // { Radar: 10, Al: 10, IC: 10, Glass: 10, Ti: 10 }
+        staticOutput: { Sat: 1 },
+        panel: MultipleRecipePanel,
+        tick: tickMultipleRecipe,
+        recipes: () => {
+            const result: BuildingNumberMap = {
+                AdvancedSatelliteFactory: 1,
+                _RadarSatellite: 1,
+                _TelescopeSatellite: 1,
+                _AsteroidRedirector: 1,
+                _AsteroidMiner: 1,
+            };
+            return result;
+        },
+    };
+    _RadarSatellite: BuildingItem = {
+        name: () => "",
+        power: -20,
+        staticInput: { Al: 1 },
+        staticOutput: { RadarSat: 1 },
+        available: () => false,
+    };
+    _TelescopeSatellite: BuildingItem = {
+        name: () => "",
+        power: -20,
+        staticInput: { Al: 1 },
+        staticOutput: { TeleSat: 1 },
+        available: () => false,
+    };
+    _AsteroidRedirector: BuildingItem = {
+        name: () => "",
+        power: -20,
+        staticInput: { Al: 1 },
+        staticOutput: { AstroDir: 1 },
+        available: () => false,
+    };
+    _AsteroidMiner: BuildingItem = {
+        name: () => "",
+        power: -20,
+        staticInput: { Al: 1 },
+        staticOutput: { AstroMiner: 1 },
+        available: () => false,
+    };
+
+    LaunchCommand: BuildingItem = {
+        name: () => t("LaunchCommand"),
+        staticInput: {},
+        staticOutput: {},
+        power: 0,
+        builtin: true,
+        page: LaunchCommandPage,
     };
 }
 

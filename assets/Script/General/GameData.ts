@@ -41,6 +41,10 @@ import { serverNow } from "./ServerClock";
 import { CHAT_CHANNEL, Socket } from "./Socket";
 import { TypedEvent } from "./TypedEvent";
 
+/////////////////// Space Expansion (Ender_Invader) ////////////////////
+import { IAsteroid } from "../SpaceExpansion/SpaceExpansion"
+////////////////////////////////////////////////////////////////////////
+
 // tslint:disable: max-classes-per-file
 
 export const MAX_ENERGY = 60;
@@ -68,6 +72,9 @@ class GlobalRef {
     wasm: Record<string, IWasmSeedFunction> = {};
     pfWorker: Worker;
     banner: string;
+
+    /////////////////// Space Expansion (Ender_Invader) ////////////////////
+    launchCommand: Entity;
 }
 
 export type IWasmSeedFunction = (a: number, b: number) => number;
@@ -335,6 +342,12 @@ export class GameData {
     tickCount = 0;
     waveCount = 0;
     entityDefault: EntityDefaultType = getEntityDefault();
+
+    /////////////////// Space Expansion (Ender_Invader) ////////////////////
+    asteroidsSpace: IAsteroid[] = [];
+    asteroidsOrbit: IAsteroid[] = [];
+    radarSats = 0;
+    telescopeSats = 0;
 }
 
 export function hasDLC(dlc: DownloadableContent): boolean {

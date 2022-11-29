@@ -136,6 +136,17 @@ const tutorials: m.Comp[] = [
         view: () => {
             return m(".box.tutorial", [
                 m.trust(t("Tutorial6")),
+                m(".action", [m("div", { onclick: () => index++ }, t("NextTutorial"))]),
+            ]);
+        },
+    },
+    {
+        oninit: () => {
+            G.world.locate(stringToGrid(findByType("LaunchCommand").grid), true);
+        },
+        view: () => {
+            return m(".box.tutorial", [
+                m.trust(t("TutorialSpaceExpansion")),
                 m(".action", [
                     m(
                         ".text-desc",

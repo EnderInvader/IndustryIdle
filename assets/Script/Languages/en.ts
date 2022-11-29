@@ -1521,4 +1521,23 @@ export const EN = {
     ClearMyTradesV2: "Purge My Trades",
     OpenSource: "Contribute",
     OpenSourceDesc: "Industry Idle is now open source. You can contribute to the development on Github",
+
+    /////////////////// Space Expansion (Ender_Invader) ////////////////////
+    TutorialSpaceExpansion: 
+        "<em>Launch Command</em> is the center of space expansion 🚀. It will be unlocked when the Advanced Satellite Factory is unlocked. Specialized satellites do not have any external worth and are only used by Launch Command.",
+    AdvancedSatelliteFactory: "Advanced Satellite Factory",
+    LaunchCommand: "Launch Command",
+    LaunchCommandInactive: "Launch Command Under Construction",
+    RadarSatellite: "Radar Satellite",
+    TelescopeSatellite: "Telescope Satellite",
+    AsteroidRedirector: "Asteroid Redirector",
+    AsteroidMiner: "Asteroid Miner",
+    AsteroidDetected: "%{amount} Asteroids Detected",
+    AsteroidDetectedItem: "%{class} detected of %{res}",
+    AsteroidRedirecting: "%{amount} Asteroids Transfering",
+    AsteroidRedirectingItem: "%{class} of %{res}",
+    AsteroidInOrbit: "%{amount} Asteroids in Orbit",
+    AsteroidInOrbitItem: "%{class} of %{res}",
+    RadarSats: "%{amount} radar satellites",
+    TelescopeSats: "%{amount} telescope satellites",
 };
