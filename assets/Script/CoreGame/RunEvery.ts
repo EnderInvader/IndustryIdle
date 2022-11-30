@@ -9,7 +9,7 @@ import { tickInterestRate, tickPrice } from "./Logic/Price";
 import { tickBuildings, tickOfflineEarning, tickOrder, tickPolicy, tickPower, tickResources } from "./Logic/Tick";
 
 /////////////////// Space Expansion (Ender_Invader) ////////////////////
-import { tickAsteroidSpace } from "../SpaceExpansion/SpaceExpansion";
+import { tickAsteroids, tickSatellites } from "../SpaceExpansion/SpaceExpansion";
 ////////////////////////////////////////////////////////////////////////
 
 export function runEverySecond() {
@@ -31,7 +31,8 @@ export function runEverySecond() {
     tickSave();
 
     /////////////////// Space Expansion (Ender_Invader) ////////////////////
-    tickAsteroidSpace(now);
+    tickSatellites();
+    tickAsteroids(now);
 }
 
 export function runEveryMinute() {

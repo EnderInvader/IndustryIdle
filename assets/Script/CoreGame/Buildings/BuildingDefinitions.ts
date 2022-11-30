@@ -1,5 +1,5 @@
 import { D, DLC, DownloadableContent, T } from "../../General/GameData";
-import { formatPercent, NOOP } from "../../General/Helper";
+import { formatPercent, NOOP, assert, forEach, getOrSet, hasValue, keysOf } from "../../General/Helper";
 import { t } from "../../General/i18n";
 import { CentralBankPage } from "../../UI/CentralBankPage";
 import { HeadquarterPage } from "../../UI/HeadquarterPage";
@@ -1888,11 +1888,34 @@ export class Buildings {
 
     LaunchCommand: BuildingItem = {
         name: () => t("LaunchCommand"),
-        staticInput: {},
+        staticInput: { RadarSat: 1000, TeleSat: 1000 },
         staticOutput: {},
         power: 0,
         builtin: true,
         page: LaunchCommandPage,
+        tick: (visual) => {
+            const advSats: ResourceSet = {
+                RadarSat: true,
+                TeleSat: true,
+                AstroDir: true,
+                AstroMiner: true,
+            };
+            if (!visual.entity.resources.RadarSat) {
+                visual.entity.resources.RadarSat = 0;
+            }
+            if (!visual.entity.resources.TeleSat) {
+                visual.entity.resources.TeleSat = 0;
+            }
+            if (!visual.entity.resources.AstroDir) {
+                visual.entity.resources.AstroDir = 0;
+            }
+            if (!visual.entity.resources.AstroMiner) {
+                visual.entity.resources.AstroMiner = 0;
+            }
+            /* forEach(advSats, (resource) => {
+                
+            }); */
+        },
     };
 }
 

@@ -36,6 +36,8 @@ export function LaunchCommandActive() {
 }
 
 export interface IAsteroid {
+    radarDetection: boolean;
+    visualDetection: boolean;
     resource: keyof Resources;
     totalAmount: number;
     leftAmount: number;
@@ -77,30 +79,71 @@ export function generateAsteroid(): IAsteroid {
     };
     let availableResources = keysOf(rawResources);
 
+    const amount = cc.randi(1000, 10000)
+    const distance = cc.randi(100, 10000);
+
     const asteroid: IAsteroid = {
+        radarDetection: false,
+        visualDetection: false,
         resource: availableResources.randOne(),
-        totalAmount: cc.randi(1000, 10000),
-        leftAmount: 0,
+        totalAmount: amount,
+        leftAmount: amount,
         time: serverNow(),
         validFor: cc.randf(5 * MINUTE, 10 * MINUTE),
-        totalDistance: cc.randi(1000, 10000),
-        leftDistance: 0,
+        totalDistance: distance,
+        leftDistance: distance,
         redirectionSats: 0,
         miningSats: 0,
     };
     return asteroid;
 }
 
-export function tickAsteroidSpace(now: number) {
+const ASTEROID_INTERVAL = 4 * MINUTE;
+export function asteroidInterval() {
+    //return D.swissBoosts.wholesaleUpgrade1 ? ORDER_INTERVAL / 2 : ORDER_INTERVAL;
+    return ASTEROID_INTERVAL;
+}
+export function tickAsteroids(now: number) {
+    // Asteroid Generation
     D.asteroidsSpace = D.asteroidsSpace.filter((o) => o.time + o.validFor >= now);
-    /* if (T.lastOrderAt === 0) {
-        T.lastOrderAt = now;
-    } */
-    /* if (now - T.lastOrderAt >= orderInterval() && wholesaleUnlocked()) {
-        //T.lastOrderAt = now;
-        const order = generateOrder();
-        D.orders.unshift(order);
-        G.audio.playEffect(G.audio.powerup);
-        showToast(t("NewOrder", { from: order.name })); // TODO: Language Def
-    } */
+    if (T.lastAsteroidAt === 0) {
+        T.lastAsteroidAt = now;
+    }
+    if (now - T.lastAsteroidAt >= asteroidInterval() && LaunchCommandActive()) {
+        T.lastAsteroidAt = now;
+        const asteroid = generateAsteroid();
+        D.asteroidsSpace.unshift(asteroid);
+
+        //G.audio.playEffect(G.audio.powerup);
+        //showToast(t("NewOrder", { from: order.name })); // TODO: Language Def
+    }
+
+    // Asteroid Detection
+    D.asteroidsSpace.forEach(asteroid => {
+        if (asteroid.leftDistance <= G.launchCommand.resources.RadarSat) {
+            asteroid.radarDetection = true;
+        }
+        else {
+            asteroid.radarDetection = false;
+        }
+    })
+    D.asteroidsSpace.forEach(asteroid => {
+        if (asteroid.radarDetection && asteroid.leftDistance <= G.launchCommand.resources.TeleSat) {
+            asteroid.visualDetection = true;
+        }
+    })
+}
+
+export function tickSatellites() {
+    if (G.launchCommand.resources.RadarSat > 1) G.launchCommand.resources.RadarSat *= 0.8;
+    else G.launchCommand.resources.RadarSat = 0;
+    
+    if (G.launchCommand.resources.TeleSat > 1) G.launchCommand.resources.TeleSat *= 0.8;
+    else G.launchCommand.resources.TeleSat = 0;
+    
+    if (G.launchCommand.resources.AstroDir > 1) G.launchCommand.resources.AstroDir *= 0.8;
+    else G.launchCommand.resources.AstroDir = 0;
+    
+    if (G.launchCommand.resources.AstroMiner > 1) G.launchCommand.resources.AstroMiner *= 0.8;
+    else G.launchCommand.resources.AstroMiner = 0;
 }

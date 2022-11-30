@@ -129,7 +129,7 @@ export default class EntityVisual extends cc.Component {
                 
                 /////////////////// Space Expansion (Ender_Invader) ////////////////////
                 case "LaunchCommand":
-                    this.setUnread(D.asteroidsSpace.length, false);
+                    this.setUnread(D.asteroidsSpace.filter(obj => obj.radarDetection ).length, false);
                     return;
                 ////////////////////////////////////////////////////////////////////////
 
@@ -312,6 +312,9 @@ export default class EntityVisual extends cc.Component {
     private isTradeCenter() {
         return this.entity.type === "TradeCenter";
     }
+    private isLaunchCommand() {
+        return this.entity.type === "LaunchCommand";
+    }
 
     private transportResourceInput() {
         this.notEnoughFuel = false;
@@ -347,14 +350,18 @@ export default class EntityVisual extends cc.Component {
                 this.entity.partialTransport = true;
                 requiredAmount = getAutoSellAmountFor(v);
             }
+            else if (this.isLaunchCommand()) {
+                this.entity.partialTransport = true;
+                this.entity.inputOverrideFallback = "drain"
+            }
 
-            const shouldAlwaysInput = this.entity.type === "Warehouse" || this.isTradeCenter();
+            const shouldAlwaysInput = this.entity.type === "Warehouse" || this.isTradeCenter() || this.isLaunchCommand();
 
             if (!shouldAlwaysInput && this.entity.resources[v] > requiredAmount * this.getInputBuffer(v)) {
                 return;
             }
 
-            if (!this.isTradeCenter()) {
+            if (!this.isTradeCenter() && !this.isLaunchCommand()) {
                 requiredAmount *= InputCapacityOverrideValues[this.entity.inputCapacityOverride];
             }
 

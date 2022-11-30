@@ -142,6 +142,9 @@ export class TempData {
     tickQueueLength = 0;
     tickCount = 0;
     currentWaveStatus: WaveStatus = "init";
+    
+    /////////////////// Space Expansion (Ender_Invader) ////////////////////
+    lastAsteroidAt = 0;
 }
 
 export type WaveStatus = "init" | "inProgress" | "success" | "fail";
@@ -346,8 +349,6 @@ export class GameData {
     /////////////////// Space Expansion (Ender_Invader) ////////////////////
     asteroidsSpace: IAsteroid[] = [];
     asteroidsOrbit: IAsteroid[] = [];
-    radarSats = 0;
-    telescopeSats = 0;
 }
 
 export function hasDLC(dlc: DownloadableContent): boolean {
